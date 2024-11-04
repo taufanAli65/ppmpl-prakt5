@@ -7,9 +7,15 @@ class WebsiteUser(HttpUser):
     @task(1)
     def get_users(self):
         self.client.get("/users")
+        
+    # Tes GET pengguna berdasarkan ID
+    @task(2)
+    def get_user_by_id(self):
+        user_id = 1  # ID yang ingin diambil
+        self.client.get(f"/users/{user_id}")
 
     # Tes POST untuk menambahkan pengguna baru
-    @task(2)
+    @task(3)
     def create_user(self):
         user_data = {
             "id": 1,
@@ -19,7 +25,7 @@ class WebsiteUser(HttpUser):
         self.client.post("/users", json=user_data)
 
     # Tes PUT untuk memperbarui data pengguna
-    @task(3)
+    @task(4)
     def update_user(self):
         user_data = {
             "id": 1,
@@ -29,6 +35,6 @@ class WebsiteUser(HttpUser):
         self.client.put("/users/1", json=user_data)
 
     # Tes DELETE untuk menghapus pengguna
-    @task(4)
+    @task(5)
     def delete_user(self):
         self.client.delete("/users/1")
